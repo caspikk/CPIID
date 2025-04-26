@@ -1,26 +1,33 @@
-# Ignore local virtual environments
+# Python stuff
 venv/
 .venv/
-
-# Ignore Python cache files
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Ignore datasets (if you have local data)
-*.csv
-*.tsv
-*.xlsx
+# Node frontend stuff
+frontend/node_modules/
+frontend/dist/
 
-# Ignore local IDE settings
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE/editor settings
 .vscode/
 .idea/
 
-# Ignore Git files
+# Model files if not deploying them
+*.pth
+*.pt
+*.h5
+
+# Git files
 .git/
 .gitignore
 
-# Ignore frontend build (only backend here)
-frontend/node_modules/
-frontend/dist/
+# Logs and temp
+*.log
+*.tmp
+*.bak

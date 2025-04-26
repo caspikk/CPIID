@@ -1,20 +1,32 @@
-# Build frontend
-FROM node:18 as frontend
+# Use official Python 3.12 image
+FROM python:3.11-slim
+
+# Set working directory inside the container
 WORKDIR /app
-COPY frontend ./frontend
-WORKDIR /app/frontend
-RUN npm install && npm run build
 
-# Backend
-FROM python:3.10-slim
-WORKDIR /app
-COPY backend ./backend
-RUN pip install --no-cache-dir -r backend/requirements.txt
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    gcc \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy frontend into backend
-COPY --from=frontend /app/frontend/dist ./frontend_dist
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+# Copy backend requirements first (for caching docker layers)
+COPY backend/requirements.txt ./backend/requirements.txt
 
+# Install Python dependencies
+RUN pip install --upgrade pip
+RUN pip install -r backend/requirements.txt
+
+# Install spaCy language models
+RUN python -m spacy download en_core_web_trf
+
+# Copy entire project into container
+COPY . .
+
+# Expose backend API port
 EXPOSE 8000
-CMD ["/docker-entrypoint.sh"]
+
+# Default command to run backend
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
