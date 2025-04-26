@@ -1,29 +1,41 @@
-# Use official Python 3.12 image
-FROM python:3.11-slim
+# ================================================
+# Stage 1: Build Stage
+# ================================================
 
-# Set working directory inside the container
+FROM python:3.13-slim-bookworm AS builder
+
 WORKDIR /app
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     build-essential \
-    curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy backend requirements first (for caching docker layers)
-COPY backend/requirements.txt ./backend/requirements.txt
-
-# Install Python dependencies
+# Install Python dependencies into a temporary directory
+COPY backend/requirements.txt .
 RUN pip install --upgrade pip
-RUN pip install -r backend/requirements.txt
+RUN pip install --prefix=/install --no-cache-dir -r requirements.txt
 
-# Copy entire project into container
-COPY . .
+# ================================================
+# Stage 2: Production Stage
+# ================================================
 
-# Expose backend API port
+FROM python:3.13-slim-bookworm
+
+WORKDIR /app
+
+# Copy installed dependencies from builder stage
+COPY --from=builder /install /usr/local
+
+# Copy backend application code
+COPY backend/ .
+
+# Copy frontend built files (already built via npm run build)
+COPY frontend/dist ./static
+
+# Expose port
 EXPOSE 8000
 
-# Default command to run backend
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start the app
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
