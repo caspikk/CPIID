@@ -1,33 +1,36 @@
-# Python stuff
+# Ignore Python virtual environments
 venv/
 .venv/
+
+# Ignore Python cache files
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Node frontend stuff
+# Ignore frontend stuff
 frontend/node_modules/
 frontend/dist/
 
-# System files
+# Ignore system files
 .DS_Store
 Thumbs.db
 
-# IDE/editor settings
+# Ignore editor settings
 .vscode/
 .idea/
 
-# Model files if not deploying them
-*.pth
-*.pt
-*.h5
-
-# Git files
+# Ignore git
 .git/
 .gitignore
 
-# Logs and temp
-*.log
-*.tmp
-*.bak
+# Ignore big data and models (IMPORTANT!)
+*.csv
+*.tsv
+*.xlsx
+*.pth
+*.pt
+*.h5
+*.zip
+*.tar
+*.tar.gz
