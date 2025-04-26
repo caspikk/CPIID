@@ -1,4 +1,4 @@
-# Ignore Python virtual environments
+# Ignore Python environments
 venv/
 .venv/
 
@@ -8,29 +8,30 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Ignore frontend stuff
+# Ignore frontend junk
 frontend/node_modules/
 frontend/dist/
 
-# Ignore system files
-.DS_Store
-Thumbs.db
-
-# Ignore editor settings
-.vscode/
-.idea/
-
-# Ignore git
-.git/
-.gitignore
-
-# Ignore big data and models (IMPORTANT!)
-*.csv
-*.tsv
-*.xlsx
+# Ignore model files
 *.pth
 *.pt
 *.h5
+
+# Ignore large data files
+*.csv
+*.xlsx
 *.zip
 *.tar
 *.tar.gz
+
+# Ignore git stuff
+.git/
+.gitignore
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
