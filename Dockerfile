@@ -19,9 +19,6 @@ COPY backend/requirements.txt ./backend/requirements.txt
 RUN pip install --upgrade pip
 RUN pip install -r backend/requirements.txt
 
-# Install spaCy language models
-RUN python -m spacy download en_core_web_trf
-
 # Copy entire project into container
 COPY . .
 
