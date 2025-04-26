@@ -1,4 +1,7 @@
 fastapi
 uvicorn
 torch
+transformers
 spacy
+spacy-transformers
+sentencepiece

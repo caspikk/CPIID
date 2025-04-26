@@ -67,7 +67,7 @@ export default function App() {
             <div key={item.index} style={{ marginBottom: '1.5rem', padding: '1rem', border: '1px solid #ccc', borderRadius: '8px' }}>
               <p><strong>Content:</strong> {item.content}</p>
               <p><strong>Contextual PII:</strong> {item.contextual_pii ? 'Yes' : 'No'}</p>
-              <p><strong>Detected Fields:</strong> {item.other_fields.length > 0 ? item.other_fields.join(', ') : 'None'}</p>
+              <p><strong>Simple PII/s:</strong> {item.other_fields.length > 0 ? item.other_fields.join(', ') : 'None'}</p>
             </div>
           ))}
         </div>
