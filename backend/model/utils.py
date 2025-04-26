@@ -2,6 +2,7 @@ import os
 import re
 import torch
 import spacy
+import subprocess
 from transformers import DebertaV2Tokenizer, DebertaV2ForSequenceClassification
 
 # Load SpaCy small English model
@@ -13,14 +14,38 @@ tokenizer = DebertaV2Tokenizer.from_pretrained("microsoft/deberta-v3-base")
 def load_contextual_model():
     """
     Loads the DeBERTa V3 model and your saved contextual_pii_model.pth weights.
+    If weights are missing, downloads from Google Drive.
     """
+    model_path = os.path.join(os.path.dirname(__file__), 'contextual_pii_model.pth')
+
+    # If model file does not exist, download it
+    if not os.path.exists(model_path):
+        print("🔽 Model file not found. Downloading from Google Drive...")
+
+        # Install gdown if not installed
+        try:
+            import gdown
+        except ImportError:
+            subprocess.check_call(["pip", "install", "gdown"])
+            import gdown
+
+        # Google Drive file ID
+        file_id = "1bCDJnaBdJKDzIhe2jadPGYm0B7XRuFtC"
+        output_path = model_path
+        gdown.download(id=file_id, output=output_path, quiet=False)
+
+        print("Model downloaded successfully!")
+
+    # Load DeBERTa model structure
     model = DebertaV2ForSequenceClassification.from_pretrained(
         "microsoft/deberta-v3-base",
         num_labels=2
     )
-    model_path = os.path.join(os.path.dirname(__file__), 'contextual_pii_model.pth')
+
+    # Load custom trained weights
     state_dict = torch.load(model_path, map_location=torch.device('cpu'))
     model.load_state_dict(state_dict, strict=False)
+
     model.eval()
     return model
 

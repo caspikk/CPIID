@@ -9,29 +9,26 @@ __pycache__/
 *.pyd
 
 # Ignore environment variable files
-.env
+# Python stuff
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-# Ignore IDE/editor settings
-.vscode/
-.idea/
-
-# Ignore frontend build files
+# Node stuff
 frontend/node_modules/
 frontend/dist/
 
-# Ignore operating system files
-.DS_Store
-Thumbs.db
-
-# Ignore docker build files if not needed
-docker-compose.override.yml
-
-# Ignore models and large files (optional, if needed)
+# Model files (IMPORTANT)
 *.pth
 *.pt
 *.h5
 
-# Ignore logs and temporary files
-*.log
-*.tmp
-*.bak
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE/editor settings
+.vscode/
+.idea/
