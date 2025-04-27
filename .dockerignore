@@ -7,25 +7,20 @@ __pycache__/
 
 # Node
 frontend/node_modules/
+frontend/.svelte-kit/
 frontend/public/
 
-# Environment
-.env
-*.env
+# Models
+backend/model/*.pth
+
+# Build folders
+build/
+dist/
 
 # Git
 .git/
 .gitignore
 
-# Dockerfiles themselves
-Dockerfile
-.dockerignore
-
-# System junk
+# Others
 .DS_Store
 Thumbs.db
-
-# Models
-*.pth
-*.pt
-*.h5

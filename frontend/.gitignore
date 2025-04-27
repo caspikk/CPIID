@@ -1,24 +1,30 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-node_modules
-dist
-dist-ssr
-*.local
+# Node
+frontend/node_modules/
+frontend/.svelte-kit/
+frontend/public/
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Models
+backend/model/contextual_pii_model.pth
+
+# Build artifacts
+build/
+dist/
+
+# Git
+.git/
+.gitignore
+
+# Others
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+
+# Local dev files
+.env
+*.env
