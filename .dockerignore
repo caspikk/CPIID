@@ -1,37 +1,31 @@
-# Ignore Python environments
+# Python
 venv/
-.venv/
-
-# Ignore Python cache files
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Ignore frontend junk
+# Node
 frontend/node_modules/
-frontend/dist/
+frontend/public/
 
-# Ignore model files
-*.pth
-*.pt
-*.h5
+# Environment
+.env
+*.env
 
-# Ignore large data files
-*.csv
-*.xlsx
-*.zip
-*.tar
-*.tar.gz
-
-# Ignore git stuff
+# Git
 .git/
 .gitignore
 
-# System files
+# Dockerfiles themselves
+Dockerfile
+.dockerignore
+
+# System junk
 .DS_Store
 Thumbs.db
 
-# Editor settings
-.vscode/
-.idea/
+# Models
+*.pth
+*.pt
+*.h5

@@ -1,34 +1,27 @@
-# Ignore Python virtual environments
-venv/
-.venv/
-
-# Ignore Python cache files
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# Ignore environment variable files
-# Python stuff
+# Python
 venv/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Node stuff
+# Node
 frontend/node_modules/
-frontend/dist/
+frontend/public/
+# ^ ignore node junk, build system files
 
-# Model files (IMPORTANT)
-*.pth
-*.pt
-*.h5
+# Environment
+.env
+*.env
 
-# System files
+# System junk
 .DS_Store
 Thumbs.db
 
-# IDE/editor settings
-.vscode/
-.idea/
+# Docker build files
+.dockerignore
+Dockerfile
+
+# Git
+.git/
+.gitignore
