@@ -7,21 +7,24 @@ __pycache__/
 
 # Node
 frontend/node_modules/
+frontend/.svelte-kit/
 frontend/public/
-# ^ ignore node junk, build system files
 
-# Environment
-.env
-*.env
+# Models
+backend/model/*.pth
 
-# System junk
-.DS_Store
-Thumbs.db
-
-# Docker build files
-.dockerignore
-Dockerfile
+# Build artifacts
+build/
+dist/
 
 # Git
 .git/
 .gitignore
+
+# Others
+.DS_Store
+Thumbs.db
+
+# Local dev files
+.env
+*.env
