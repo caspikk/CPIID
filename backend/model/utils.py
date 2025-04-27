@@ -6,7 +6,16 @@ import subprocess
 from transformers import DebertaV2Tokenizer, DebertaV2ForSequenceClassification
 
 # Load SpaCy small English model
-nlp = spacy.load("en_core_web_trf")
+# Load lightweight small spaCy model
+def load_spacy_model():
+    try:
+        nlp = spacy.load("en_core_web_sm")
+    except OSError:
+        from spacy.cli import download
+        download("en_core_web_sm")
+        nlp = spacy.load("en_core_web_sm")
+    return nlp
+nlp = load_spacy_model()
 
 # Load DeBERTa tokenizer once
 tokenizer = DebertaV2Tokenizer.from_pretrained("microsoft/deberta-v3-base")
@@ -104,10 +113,6 @@ def classical_pii_detect(text):
             detected_pii.append("DATE")
         elif ent.label_ == "ORG":
             detected_pii.append("ORGANIZATION")
-
-    # Simple manual hack to catch Tony Stark
-    if "Tony Stark" in text:
-        detected_pii.append("NAME")
 
     return list(set(detected_pii))
 

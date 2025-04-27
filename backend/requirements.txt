@@ -1,7 +1,6 @@
 fastapi
 uvicorn
-torch
-transformers
-spacy
-spacy-transformers
-sentencepiece
+torch==2.1.2+cpu
+transformers==4.37.2
+spacy==3.7.2
+gdown
